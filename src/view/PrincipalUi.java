@@ -21,38 +21,37 @@ public class PrincipalUi extends javax.swing.JFrame {
      */
     public PrincipalUi() {
         initComponents();
-        inicializaTela(false);
+        initScreen(false);
         player3TextField.setEnabled(false);
         player4TextField.setEnabled(false);
     }
 
-    //INICIO METODOS AUXILIARES
-    private void inicializaTela(boolean estado){
-        die1Button.setEnabled(estado);
-        die2Button.setEnabled(estado);
-        die3Button.setEnabled(estado);
-        die4Button.setEnabled(estado);
-        die5Button.setEnabled(estado);
-        rollButton.setEnabled(estado);
+    private void initScreen(boolean isEnable) {
+        die1Button.setEnabled(isEnable);
+        die2Button.setEnabled(isEnable);
+        die3Button.setEnabled(isEnable);
+        die4Button.setEnabled(isEnable);
+        die5Button.setEnabled(isEnable);
+        rollButton.setEnabled(isEnable);
         
-        ativaJogadas(estado);
-        acesTextField.setEnabled(estado);
-        twosTextField.setEnabled(estado);
-        threesTextField.setEnabled(estado);
-        foursTextField.setEnabled(estado);
-        fivesTextField.setEnabled(estado);
-        sixesTextField.setEnabled(estado);
-        threeOfAKindTextField.setEnabled(estado);
-        fourOfAKindTextField.setEnabled(estado);
-        fullHouseTextField.setEnabled(estado);
-        largeStraightTextField.setEnabled(estado);
-        smallStraightTextField.setEnabled(estado);
-        yahtzeeTextField.setEnabled(estado);
-        chanceTextField.setEnabled(estado);
+        initScorecardFields(isEnable);
+        acesTextField.setEnabled(isEnable);
+        twosTextField.setEnabled(isEnable);
+        threesTextField.setEnabled(isEnable);
+        foursTextField.setEnabled(isEnable);
+        fivesTextField.setEnabled(isEnable);
+        sixesTextField.setEnabled(isEnable);
+        threeOfAKindTextField.setEnabled(isEnable);
+        fourOfAKindTextField.setEnabled(isEnable);
+        fullHouseTextField.setEnabled(isEnable);
+        largeStraightTextField.setEnabled(isEnable);
+        smallStraightTextField.setEnabled(isEnable);
+        yahtzeeTextField.setEnabled(isEnable);
+        chanceTextField.setEnabled(isEnable);
         
-        MovesPanel.setEnabled(estado);
-        scorecardPanel.setEnabled(estado);
-        totalScorePanel.setEnabled(estado);
+        MovesPanel.setEnabled(isEnable);
+        scorecardPanel.setEnabled(isEnable);
+        totalScorePanel.setEnabled(isEnable);
         
         acesTextField.setEditable(false);
         twosTextField.setEditable(false);
@@ -70,33 +69,47 @@ public class PrincipalUi extends javax.swing.JFrame {
         
     }
     
-    private void ativaJogadas(boolean estado){
-        acesButton.setEnabled(estado);
-        acesTextField.setText("");
-        twosButton.setEnabled(estado);
-        twosTextField.setText("");
-        threesButton.setEnabled(estado);
-        threesTextField.setText("");
-        foursButton.setEnabled(estado);
-        foursTextField.setText("");
-        fivesButton.setEnabled(estado);
-        fivesTextField.setText("");
-        sixesButton.setEnabled(estado);
-        sixesTextField.setText("");
-        threeOfAKindButton.setEnabled(estado);
-        threeOfAKindTextField.setText("");
-        fourOfAKindButton.setEnabled(estado);
-        fourOfAKindTextField.setText("");
-        fullHouseButton.setEnabled(estado);
-        fullHouseTextField.setText("");
-        largeStraightButton.setEnabled(estado);
-        largeStraightTextField.setText("");
-        smallStraightButton.setEnabled(estado);
-        smallStraightTextField.setText("");
-        yahtzeeButton.setEnabled(estado);
-        yahtzeeTextField.setText("");
-        chanceButton.setEnabled(estado);
-        chanceTextField.setText("");
+    private void initScorecardFields(boolean isEnable) {
+        String initialValue = "";
+        
+        acesButton.setEnabled(isEnable);
+        acesTextField.setText(initialValue);
+        
+        twosButton.setEnabled(isEnable);
+        twosTextField.setText(initialValue);
+        
+        threesButton.setEnabled(isEnable);
+        threesTextField.setText(initialValue);
+        
+        foursButton.setEnabled(isEnable);
+        foursTextField.setText(initialValue);
+        
+        fivesButton.setEnabled(isEnable);
+        fivesTextField.setText(initialValue);
+        
+        sixesButton.setEnabled(isEnable);
+        sixesTextField.setText(initialValue);
+        
+        threeOfAKindButton.setEnabled(isEnable);
+        threeOfAKindTextField.setText(initialValue);
+        
+        fourOfAKindButton.setEnabled(isEnable);
+        fourOfAKindTextField.setText(initialValue);
+        
+        fullHouseButton.setEnabled(isEnable);
+        fullHouseTextField.setText(initialValue);
+        
+        largeStraightButton.setEnabled(isEnable);
+        largeStraightTextField.setText(initialValue);
+        
+        smallStraightButton.setEnabled(isEnable);
+        smallStraightTextField.setText(initialValue);
+        
+        yahtzeeButton.setEnabled(isEnable);
+        yahtzeeTextField.setText(initialValue);
+        
+        chanceButton.setEnabled(isEnable);
+        chanceTextField.setText(initialValue);
     }
     
     private void ativaPainelJogadores(boolean estado){
@@ -198,7 +211,7 @@ public class PrincipalUi extends javax.swing.JFrame {
                 partida.jogadorNaVez().setRolagensRestantes(3);
                 jogadorNaVezLabel.setText(partida.jogadorNaVez().getNome());
 
-                ativaJogadas(true);
+                initScorecardFields(true);
                 gerenciaJogadas();
                 zeraDados();
 
@@ -233,13 +246,13 @@ public class PrincipalUi extends javax.swing.JFrame {
             partida.jogadorNaVez().setRolagensRestantes(3);
             jogadorNaVezLabel.setText(partida.jogadorNaVez().getNome());
 
-            ativaJogadas(true);
+            initScorecardFields(true);
             gerenciaJogadas();
             zeraDados();
         }
         
         if(partida.fimPartida())
-            JOptionPane.showMessageDialog(null, "Fim de Jogo.\n O vencedor foi " + partida.obterJogadorMaiorPontuacao().getNome());
+            JOptionPane.showMessageDialog(null, "Game Over.\n The winner is " + partida.obterJogadorMaiorPontuacao().getNome()  + ".");
         
     }
     
@@ -249,10 +262,9 @@ public class PrincipalUi extends javax.swing.JFrame {
             botao.setForeground(Color.red);
         }
         catch(RuntimeException e){
-            JOptionPane.showMessageDialog(null, "É necessário rolar os dados primeiro.");
+            JOptionPane.showMessageDialog(null, "You need to roll the dice first.");
         }
     }
-    //FIM METODOS AUXILIARES
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -892,7 +904,7 @@ public class PrincipalUi extends javax.swing.JFrame {
 
     private void instanciaJogador1e2(){
         Jogador jogador;
-        inicializaTela(true);
+        initScreen(true);
         ativaPainelJogadores(false);
         
         partida = new Partida();
@@ -911,11 +923,13 @@ public class PrincipalUi extends javax.swing.JFrame {
     }
     
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
+        final String message = "You must fill in all available fields to start a game.";
+        
         if(numberOfPlayersComboBox.getSelectedIndex() == 0){
             if(!player1TextField.getText().isEmpty() && !player2TextField.getText().isEmpty())
                 instanciaJogador1e2();
             else
-                JOptionPane.showMessageDialog(null, "É necessário que todos os jogadores estejam preenchidos para iniciar uma partida.");         
+                JOptionPane.showMessageDialog(null, message);         
         }
         if(numberOfPlayersComboBox.getSelectedIndex() == 1){
             if(!player1TextField.getText().isEmpty() && !player2TextField.getText().isEmpty()){
@@ -927,10 +941,10 @@ public class PrincipalUi extends javax.swing.JFrame {
                     player3Name_scoreLabel.setText(jogador.getNome());
                     player3ScoreLabel.setText(String.valueOf(0));
                 }else{
-                    JOptionPane.showMessageDialog(null, "É necessário que todos os jogadores estejam preenchidos para iniciar uma partida.");
+                    JOptionPane.showMessageDialog(null, message);
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "É necessário que todos os jogadores estejam preenchidos para iniciar uma partida.");
+                JOptionPane.showMessageDialog(null, message);
             }
         }
         if(numberOfPlayersComboBox.getSelectedIndex() == 2){
@@ -943,10 +957,10 @@ public class PrincipalUi extends javax.swing.JFrame {
                     player3Name_scoreLabel.setText(jogador.getNome());
                     player3ScoreLabel.setText(String.valueOf(0));
                 }else{
-                    JOptionPane.showMessageDialog(null, "É necessário que todos os jogadores estejam preenchidos para iniciar uma partida.");
+                    JOptionPane.showMessageDialog(null, message);
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "É necessário que todos os jogadores estejam preenchidos para iniciar uma partida.");
+                JOptionPane.showMessageDialog(null, message);
             }
         }
     }//GEN-LAST:event_startGameButtonActionPerformed
@@ -964,13 +978,13 @@ public class PrincipalUi extends javax.swing.JFrame {
             die5Button.setText(String.valueOf(dados[4].getValor()));
             
         }catch(RuntimeException e){
-            JOptionPane.showMessageDialog(null, "Suas rolagens acabaram. Selecione uma jogada.");
+            JOptionPane.showMessageDialog(null, "Your rolls are over. Select a move.");
         } 
         
         try{
             partida.jogadorNaVez().verificarJogadasPossiveis();
         }catch(RuntimeException e){
-            JOptionPane.showMessageDialog(null, "Não há mais jogadas possíveis. Selecione uma jogada que você deseja descartar");
+            JOptionPane.showMessageDialog(null, "There are no more possible moves. Select a play you want to discard.");
         }
     }//GEN-LAST:event_rollButtonActionPerformed
 
