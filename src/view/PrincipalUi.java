@@ -335,7 +335,7 @@ public class PrincipalUi extends javax.swing.JFrame {
         jogadorNaVezLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("General");
+        setTitle("Yahtzee");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         playersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Players"));
@@ -891,8 +891,6 @@ public class PrincipalUi extends javax.swing.JFrame {
                 .addComponent(MovesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        playersPanel.getAccessibleContext().setAccessibleName("Players");
 
         pack();
         setLocationRelativeTo(null);
